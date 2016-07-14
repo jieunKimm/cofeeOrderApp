@@ -16,7 +16,6 @@
         android:layout_marginLeft="16dp"
         android:layout_marginBottom="8dp" />
 
-
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -24,7 +23,7 @@
         android:text="+"
         android:layout_marginLeft="16dp"
         android:id="@+id/plus_button"
-        android:onClick="plusCupOfCoffees"/>
+        android:onClick="increment"/>
 
     <TextView
         android:id="@+id/quantity_text_view"
@@ -43,7 +42,7 @@
         android:text="-"
         android:layout_marginLeft="16dp"
         android:id="@+id/minus_button"
-        android:onClick="minusCupOfCoffees"/>
+        android:onClick="decrement"/>
 
     <TextView
 

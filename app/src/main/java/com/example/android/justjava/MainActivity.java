@@ -27,16 +27,18 @@ public class MainActivity extends ActionBarActivity {
         display(numberOfCoffees);
         displayPrice(numberOfCoffees * 5);
     }
-
-    public void plusCupOfCoffees(View view) {
-        int numberOfCoffees=2;
-        display(numberOfCoffees++);
+    /**
+     * This method is called when the plus button is clicked.
+     */
+    public void increment(View view) {
+        int quantity=3;
+        display(quantity);
     }
-/**
-    public void minusCupOfCoffees(View view) {
-        int numberOfCoffees=5;
-        displayPrice(numberOfCoffees*5);
-    }**/
+
+    public void decrement(View view) {
+        int quantity=1;
+        display(quantity);
+    }
     /**
      * This method displays the given quantity value on the screen.
      */
