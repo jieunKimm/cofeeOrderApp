@@ -23,43 +23,43 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "total : $"+(quantity*5)+"\nthank you!";
-        displayMessage(priceMessage);
+        displayMessage(createOrderSummary());
     }
     /**
      * This method is called when the plus button is clicked.
      */
     public void increment(View view) {
-        quantity=quantity+1;
-        display(quantity);
+        quantity=quantity + 1;
+        displayQuantity(quantity);
     }
 
     public void decrement(View view) {
-        quantity=quantity-1;
-        display(quantity);
+        quantity=quantity - 1;
+        displayQuantity(quantity);
+    }
+    public String createOrderSummary(){
+        int price = calculatePrice();
+        String priceMessage = "Name : Kaptain Kunal\n"+"Quantity :"+quantity+"\nTotal : $"+ price+"\nthank you!";
+        return priceMessage;
     }
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
         quantityTextView.setText("" + number);
     }
 
-    /**
-     * This method displays the given price on the screen.
-     */
-    private void displayPrice(int number) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
-        priceTextView.setText(NumberFormat.getCurrencyInstance().format(number));
+    private int calculatePrice(){
+        int price = quantity*5;
+        return price;
     }
-
     /**
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
+        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
         priceTextView.setText(message);
     }
 }
