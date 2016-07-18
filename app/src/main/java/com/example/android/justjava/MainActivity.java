@@ -2,7 +2,10 @@ package com.example.android.justjava;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import java.text.NumberFormat;
 
@@ -23,7 +26,14 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        displayMessage(createOrderSummary());
+        CheckBox whippedCream = (CheckBox) findViewById(R.id.checkBox);
+        CheckBox chocolate = (CheckBox) findViewById(R.id.choco_checkBox);
+        EditText name = (EditText) findViewById(R.id.nameText);
+        String username = name.is;
+        boolean haschoco = chocolate.isChecked();
+        boolean haswhipped = whippedCream.isChecked();
+        String priceMessage = createOrderSummary(haswhipped, haschoco, username);
+        displayMessage(priceMessage);
     }
     /**
      * This method is called when the plus button is clicked.
@@ -37,9 +47,15 @@ public class MainActivity extends ActionBarActivity {
         quantity=quantity - 1;
         displayQuantity(quantity);
     }
-    public String createOrderSummary(){
+    public String createOrderSummary(boolean whipped, boolean choco, String username){
         int price = calculatePrice();
-        String priceMessage = "Name : Kaptain Kunal\n"+"Quantity :"+quantity+"\nTotal : $"+ price+"\nthank you!";
+        String priceMessage = "Name : " + username;
+        priceMessage += "\nAdd whipped cream? " + whipped;
+        priceMessage += "\nAdd chocolate? " + choco;
+        priceMessage += "\nQuantity : "+ quantity;
+        priceMessage += "\nTotal : $"+ price;
+        priceMessage += "\nthank you!";
+
         return priceMessage;
     }
     /**
@@ -59,7 +75,7 @@ public class MainActivity extends ActionBarActivity {
      * This method displays the given text on the screen.
      */
     private void displayMessage(String message) {
-        TextView priceTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        priceTextView.setText(message);
+        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
+        orderSummaryTextView.setText(message);
     }
 }
