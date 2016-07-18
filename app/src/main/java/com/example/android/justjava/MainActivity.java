@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
         CheckBox whippedCream = (CheckBox) findViewById(R.id.checkBox);
         CheckBox chocolate = (CheckBox) findViewById(R.id.choco_checkBox);
         EditText name = (EditText) findViewById(R.id.nameText);
-        String username = name.is;
+        String username = name.getText().toString();
         boolean haschoco = chocolate.isChecked();
         boolean haswhipped = whippedCream.isChecked();
         String priceMessage = createOrderSummary(haswhipped, haschoco, username);
@@ -47,8 +47,10 @@ public class MainActivity extends ActionBarActivity {
         quantity=quantity - 1;
         displayQuantity(quantity);
     }
+
+
     public String createOrderSummary(boolean whipped, boolean choco, String username){
-        int price = calculatePrice();
+        int price = calculatePrice(whipped, choco);
         String priceMessage = "Name : " + username;
         priceMessage += "\nAdd whipped cream? " + whipped;
         priceMessage += "\nAdd chocolate? " + choco;
@@ -67,8 +69,16 @@ public class MainActivity extends ActionBarActivity {
         quantityTextView.setText("" + number);
     }
 
-    private int calculatePrice(){
+    private int calculatePrice(boolean whipped, boolean choco){
         int price = quantity*5;
+        if (choco) {
+            price = price+quantity;
+        } else {
+        }
+        if (whipped) {
+            price = price+quantity;
+        } else {
+        }
         return price;
     }
     /**
