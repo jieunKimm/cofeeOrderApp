@@ -1,5 +1,7 @@
 package com.example.android.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -33,7 +35,14 @@ public class MainActivity extends ActionBarActivity {
         boolean haschoco = chocolate.isChecked();
         boolean haswhipped = whippedCream.isChecked();
         String priceMessage = createOrderSummary(haswhipped, haschoco, username);
-        displayMessage(priceMessage);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "Just java order for" + name);
+        intent.putExtra(Intent.EXTRA_TEXT,priceMessage );
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
     }
     /**
      * This method is called when the plus button is clicked.
@@ -44,7 +53,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void decrement(View view) {
-        quantity=quantity - 1;
+        if(quantity > 0){
+        quantity=quantity - 1;}
+        else{
+            quantity = 0;
+        }
         displayQuantity(quantity);
     }
 
@@ -72,20 +85,11 @@ public class MainActivity extends ActionBarActivity {
     private int calculatePrice(boolean whipped, boolean choco){
         int price = quantity*5;
         if (choco) {
-            price = price+quantity;
-        } else {
+            price = price+quantity *2;
         }
         if (whipped) {
             price = price+quantity;
-        } else {
         }
         return price;
-    }
-    /**
-     * This method displays the given text on the screen.
-     */
-    private void displayMessage(String message) {
-        TextView orderSummaryTextView = (TextView) findViewById(R.id.order_summary_text_view);
-        orderSummaryTextView.setText(message);
     }
 }
